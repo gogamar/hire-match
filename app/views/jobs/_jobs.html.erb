@@ -3,7 +3,7 @@
     <li class="relative flex items-center space-x-4 py-4">
       <div class="min-w-0 flex-auto">
         <div class="flex items-center gap-x-3">
-          <div class="flex-none rounded-full bg-<%= color %>-100/10 p-1 text-<%= color %>-500">
+          <div class="flex-none rounded-full bg-green-100/10 p-1 text-green-500">
             <div class="h-2 w-2 rounded-full bg-current"></div>
           </div>
           <h2 class="min-w-0 text-sm font-semibold leading-6 text-white relative">
@@ -33,11 +33,11 @@
       </div>
       <% if @current_candidate %>
         <% job_application = @current_candidate.job_applications.find_by(job_id: job.id) %>
-        <div class="flex items-center rounded-full bg-<%= color %>-400/10 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-<%= color %>-400/20">
+        <div class="flex items-center rounded-full bg-green-400/10 px-2 py-1 text-xs font-medium text-white-400 ring-1 ring-inset ring-green-400/20">
           <% if job_application %>
-            <%= link_to 'My Job Application', job_application_path(job_application), class: "text-#{color}-600 hover:text-white" %>
+            <%= link_to 'My Job Application', job_application_path(job_application), class: "text-green-600 hover:text-white-800" %>
           <% elsif job.interview.present? %>
-            <%= link_to 'Access the Interview', interview_path(job.interview), class: "text-#{color}-600 hover:text-#{color}-800" %>
+            <%= link_to 'Access the Interview', interview_path(job.interview), class: "text-green-600 hover:text-green-800" %>
           <% end %>
           <svg class="h-5 w-5 flex-none text-gray-400 ml-2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
@@ -51,8 +51,8 @@
           </svg>
         </div>
         <% if job.job_applications.exists? %>
-          <div class="flex items-center rounded-full bg-gray-400/10 px-2 py-1 text-xs font-medium text-<%= color %>-400 ring-1 ring-inset ring-gray-400/20">
-            <%= link_to 'View Candidates', candidates_path(job_id: job.id), class: "text-#{color}-600 hover:text-#{color}-800" %>
+          <div class="flex items-center rounded-full bg-gray-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-gray-400/20">
+            <%= link_to 'View Candidates', candidates_path(job_id: job.id), class: "text-green-600 hover:text-green-800" %>
             <svg class="h-5 w-5 flex-none text-gray-400 ml-2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
             </svg>

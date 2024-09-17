@@ -17,7 +17,6 @@ class CompaniesController < ApplicationController
 
   def published_jobs
     @published_jobs = @current_company.jobs
-    @color = "green"
   end
 
   private

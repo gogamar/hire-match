@@ -19,7 +19,6 @@ class CandidatesController < ApplicationController
   def favorite_jobs
     job_ids = @candidate.likes.pluck(:job_id)
     @favorite_jobs = Job.where(id: job_ids)
-    @color = "cyan"
   end
 
   private

@@ -7,7 +7,6 @@ class JobsController < ApplicationController
     if @current_candidate
       @jobs = @jobs.where.not(id: @current_candidate.job_applications.pluck(:job_id))
     end
-    @color = "green"
   end
 
   def show

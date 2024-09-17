@@ -2,7 +2,6 @@ class JobApplicationsController < ApplicationController
   def index
     @job_applications = policy_scope(JobApplication)
     @jobs = Job.where(id: @job_applications.pluck(:job_id))
-    @color = "blue"
   end
 
   def show
