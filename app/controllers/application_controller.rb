@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
-  @random_logo_url = Faker::Company.logo
-
   def set_user_role
     return unless current_user.present?
     if current_user.candidate?
