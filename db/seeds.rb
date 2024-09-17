@@ -3,6 +3,7 @@ Candidate.destroy_all
 Company.destroy_all
 User.destroy_all
 Job.destroy_all
+Like.destroy_all
 Interview.destroy_all
 Question.destroy_all
 
@@ -48,13 +49,19 @@ companies.each do |company|
   end
 end
 
+puts "Created #{Job.count} jobs"
+
 candidates = Candidate.all
 
 candidates.each do |candidate|
-  candidate.jobs << Job.all.sample(rand(1..3))
+  random_job = Job.order('RANDOM()').first
+  Like.create(candidate_id: candidate.id, job_id: random_job.id)
 end
 
-puts "Created #{Job.count} jobs"
+Like.first.update(match: true)
+Like.last.update(match: true)
+
+puts "Created #{Like.count} likes"
 
 # Define sample questions
 questions_for_interviews = [
