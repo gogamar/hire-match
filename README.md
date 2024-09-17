@@ -51,7 +51,7 @@
    rails generate devise:install
 ```
 
-4. **Configure OpenAI API:**
+5. **Configure OpenAI API:**
 
 Set your OpenAI API key in your environment variables. You can do this by adding the following to your .env file or setting it directly on your hosting platform:
 
