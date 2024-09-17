@@ -1,12 +1,26 @@
 <div class="py-10">
-  <header>
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900">Dashboard</h1>
-    </div>
-  </header>
   <main>
     <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <!-- Your content -->
-    </div>
-  </main>
-</div>
+      <!-- Greeting Section -->
+      <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+        <h1 class="text-xl font-semibold mb-4">Hello, <%= current_user.candidate? ? current_user.candidate.name : current_user.company.name %>!</h1>
+        <p class="text-sm font-semibold leading-6 text-gray-900">A quote to start your day:</p>
+        <blockquote class="text-gray-700 italic mt-4 text-sm">
+          "<%= @quote_of_the_day %>"
+        </blockquote>
+      </div>
+      <!-- Matched Section -->
+      <% if @current_company.present? %>
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+          <h2 class="text-xl font-semibold mb-4">Your jobs and matched candidates</h2>
+          <%= render "company_jobs", company: @current_company %>
+        </div>
+      <% end %>
+      <% if @matched_jobs.present? %>
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+          <h2 class="text-xl font-semibold mb-4">Jobs you've matched with!</h2>
+          <%= render "candidate_matches", matched_jobs: @matched_jobs %>
+        </div>
+      <% end %>
+    </main>
+  </div>

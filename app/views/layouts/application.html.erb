@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="h-full bg-gray-900">
   <head>
-    <title>HireMatch</title>
+    <title><%= yield :title %> - Hire Match</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,12 +11,9 @@
   </head>
   <body class="h-full">
     <%= render "shared/navbar" %>
-    <div class="min-h-screen pt-16">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <%= yield %>
-      </div>
+    <%= render "shared/flashes" %>
+    <div class="container mx-auto px-8 sm:px-6 lg:px-8 lg:pt-8">
+      <%= yield %>
     </div>
   </body>
 </html>

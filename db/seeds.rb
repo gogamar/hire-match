@@ -1,39 +1,42 @@
 # Clear existing data
+Candidate.destroy_all
+Company.destroy_all
 User.destroy_all
 Job.destroy_all
 Interview.destroy_all
 Question.destroy_all
 
-users = User.create!(
-  [
-    { email: 'alice@example.com', password: 'password123', role: :candidate },
-    { email: 'bob@example.com', password: 'password123', role: :candidate },
-    { email: 'charlie@example.com', password: 'password123', role: :candidate },
-    { email: 'techinnovations@example.com', password: 'password123', role: :company },
-    { email: 'creativesolutions@example.com', password: 'password123', role: :company }
-  ]
-)
+users_data = [
+  { email: 'alice@example.com', password: 'password123', role: :candidate, name: 'Alice', surname: 'Johnson' },
+  { email: 'bob@example.com', password: 'password123', role: :candidate, name: 'Bob', surname: 'Smith' },
+  { email: 'charlie@example.com', password: 'password123', role: :candidate, name: 'Charlie', surname: 'Brown' },
+  { email: 'techinnovations@example.com', password: 'password123', role: :company, name: 'Tech Innovations' },
+  { email: 'creativesolutions@example.com', password: 'password123', role: :company, name: 'Creative Solutions' }
+]
 
-puts "Created #{User.count} users"
+users_data.each do |user_data|
+  user = User.find_or_create_by(email: user_data[:email]) do |u|
+    u.password = user_data[:password]
+    u.role = user_data[:role]
+  end
 
-users.each do |user|
   if user.candidate?
-    candidate = Candidate.where(user: user).first_or_create!
-    candidate.update!(name: Faker::Name.first_name, surname: Faker::Name.last_name)
+    candidate = Candidate.find_or_initialize_by(user: user)
+    candidate.update(name: user_data[:name], surname: user_data[:surname])
   elsif user.company?
-    company = Company.where(user: user).first_or_create!
-    company.update!(name: Faker::Company.name)
+    company = Company.find_or_initialize_by(user: user)
+    company.update(name: user_data[:name])
   end
 end
 
-# Define sample jobs
+# Define sample jobs with descriptions
 jobs = [
-  { title: 'Software Engineer', location: 'San Francisco, CA' },
-  { title: 'Product Manager', location: 'New York, NY' },
-  { title: 'Data Scientist', location: 'Austin, TX' },
-  { title: 'UX Designer', location: 'Remote' },
-  { title: 'Marketing Specialist', location: 'Los Angeles, CA' },
-  { title: 'Sales Manager', location: 'Chicago, IL' }
+  { title: 'Software Engineer', location: 'San Francisco, CA', description: 'Develop and maintain software applications, collaborate with cross-functional teams, and ensure high performance and responsiveness of applications.' },
+  { title: 'Product Manager', location: 'New York, NY', description: 'Oversee product development from concept to launch, manage project timelines, and work closely with engineering and marketing teams to deliver successful products.' },
+  { title: 'Data Scientist', location: 'Austin, TX', description: 'Analyze and interpret complex data sets, create data models, and develop actionable insights to help guide business decisions and strategies.' },
+  { title: 'UX Designer', location: 'Remote', description: 'Design user-friendly interfaces and experiences, conduct user research, and collaborate with developers to ensure intuitive and engaging designs.' },
+  { title: 'Marketing Specialist', location: 'Los Angeles, CA', description: 'Plan and execute marketing campaigns, analyze market trends, and develop strategies to increase brand awareness and drive customer engagement.' },
+  { title: 'Sales Manager', location: 'Chicago, IL', description: 'Lead and manage the sales team, develop sales strategies, and build relationships with clients to drive revenue growth and achieve sales targets.' }
 ]
 
 companies = Company.all

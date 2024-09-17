@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_14_202711) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_17_004838) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,10 +18,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_202711) do
     t.text "content"
     t.text "reaction"
     t.bigint "question_id", null: false
-    t.bigint "candidate_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["candidate_id"], name: "index_answers_on_candidate_id"
+    t.bigint "job_application_id", null: false
+    t.index ["job_application_id"], name: "index_answers_on_job_application_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
@@ -32,15 +32,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_202711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_candidates_on_user_id"
-  end
-
-  create_table "candidates_jobs", id: false, force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.bigint "candidate_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["candidate_id"], name: "index_candidates_jobs_on_candidate_id"
-    t.index ["job_id"], name: "index_candidates_jobs_on_job_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -59,13 +50,45 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_202711) do
     t.index ["job_id"], name: "index_interviews_on_job_id"
   end
 
+  create_table "job_applications", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "candidate_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status"
+    t.index ["candidate_id"], name: "index_job_applications_on_candidate_id"
+    t.index ["job_id"], name: "index_job_applications_on_job_id"
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.string "title"
     t.string "location"
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["company_id"], name: "index_jobs_on_company_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "candidate_id", null: false
+    t.boolean "match"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_likes_on_candidate_id"
+    t.index ["job_id"], name: "index_likes_on_job_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "message"
+    t.integer "status", default: 0
+    t.string "notification_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -90,11 +113,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_14_202711) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "answers", "candidates"
+  add_foreign_key "answers", "job_applications"
   add_foreign_key "answers", "questions"
   add_foreign_key "candidates", "users"
   add_foreign_key "companies", "users"
   add_foreign_key "interviews", "jobs"
+  add_foreign_key "job_applications", "candidates"
+  add_foreign_key "job_applications", "jobs"
   add_foreign_key "jobs", "companies"
+  add_foreign_key "likes", "candidates"
+  add_foreign_key "likes", "jobs"
+  add_foreign_key "notifications", "users"
   add_foreign_key "questions", "interviews"
 end

@@ -1,0 +1,33 @@
+<ul role="list" class="divide-y divide-gray-100">
+  <% company.jobs.each do |job| %>
+    <li class="flex items-center justify-between gap-x-6 py-5">
+      <div class="min-w-0">
+        <div class="flex items-start gap-x-3">
+          <p class="text-sm font-semibold leading-6 text-gray-900"><%= job.title %></p>
+        </div>
+        <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+          <% if job.likes.any? %>
+            <% job.likes.each_with_index do |like, index| %>
+              <% if like.match? %>
+                <p class="mt-0.5 whitespace-nowrap rounded-md bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">It's a match!</p>
+              <% end %>
+              <p class="whitespace-nowrap">
+                <%= link_to "#{like.candidate.name} #{like.candidate.surname}", candidate_path(like.candidate), class: "text-indigo-800 hover:text-green-800" %>
+              </p>
+              <%= render 'like_candidate',
+                like_path: job_like_path(job, like),
+                liked: like.match? %>
+              <% if index < job.likes.size - 1 %>
+                <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 fill-current text-green-600">
+                  <circle cx="1" cy="1" r="1" />
+                </svg>
+              <% end %>
+            <% end %>
+          <% else %>
+            <p>No candidates have liked this job yet.</p>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

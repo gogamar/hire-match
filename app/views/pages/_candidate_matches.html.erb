@@ -1,0 +1,15 @@
+<ul role="list" class="divide-y divide-gray-100">
+  <% matched_jobs.each do |job|  %>
+    <li class="flex items-center justify-between gap-x-6 py-5">
+      <div class="min-w-0">
+        <div class="flex items-start gap-x-3">
+          <p class="text-sm font-semibold leading-6 text-gray-900"><%= job.title %></p>
+          <p class="mt-0.5 whitespace-nowrap rounded-md bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">It's a match!</p>
+        </div>
+      </div>
+      <div class="flex flex-none items-center gap-x-4">
+        <%= link_to "View job", job, class: "hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block" %>
+      </div>
+    </li>
+  <% end %>
+</ul>

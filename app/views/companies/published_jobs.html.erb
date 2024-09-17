@@ -1,0 +1,9 @@
+<%= content_for :title, 'Published Jobs' %>
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-3xl font-bold mb-4 text-white">Jobs you published</h1>
+  <% if @published_jobs.present? %>
+    <%= render "jobs/jobs", jobs: @published_jobs %>
+  <% else %>
+    <p class="text-gray-500">You haven't published any jobs yet.</p>
+  <% end %>
+</div>

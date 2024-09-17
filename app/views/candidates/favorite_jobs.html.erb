@@ -1,0 +1,9 @@
+<%= content_for :title, 'Favorite Jobs' %>
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-3xl font-bold mb-4 text-white">Favorite Jobs</h1>
+  <% if @favorite_jobs.present? %>
+    <%= render "jobs/jobs", jobs: @favorite_jobs %>
+  <% else %>
+    <p class="text-gray-500">You don't have any favorite jobs yet.</p>
+  <% end %>
+</div>
