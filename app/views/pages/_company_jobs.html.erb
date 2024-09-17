@@ -12,7 +12,7 @@
                 <p class="mt-0.5 whitespace-nowrap rounded-md bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">It's a match!</p>
               <% end %>
               <p class="whitespace-nowrap">
-                <%= link_to "#{like.candidate.name} #{like.candidate.surname}", candidate_path(like.candidate), class: "text-indigo-800 hover:text-green-800" %>
+                <%= link_to "#{like.candidate.name} #{like.candidate.surname}", candidate_path(like.candidate), class: "text-cyan-800 hover:text-green-800" %>
               </p>
               <%= render 'like_candidate',
                 like_path: job_like_path(job, like),

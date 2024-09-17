@@ -3,19 +3,19 @@
     <div class="flex h-16 justify-between items-center">
       <!-- Logo Section -->
       <div class="flex-shrink-0">
-        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=cyan&shade=600" alt="Your Company">
       </div>
       <!-- Navigation Links -->
       <% if user_signed_in? %>
         <div class="flex space-x-8">
-          <%= link_to "Dashboard", root_path, class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(root_path) ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(root_path) ? 'page' : nil } %>
+          <%= link_to "Dashboard", root_path, class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(root_path) ? 'border-cyan-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(root_path) ? 'page' : nil } %>
           <% if @current_candidate.present? %>
-            <%= link_to "Jobs", jobs_path, class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(jobs_path) ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(jobs_path) ? 'page' : nil } %>
-            <%= link_to "My Favorite Jobs", favorite_jobs_candidate_path(@current_candidate), class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(favorite_jobs_candidate_path(@current_candidate)) ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(favorite_jobs_candidate_path(@current_candidate)) ? 'page' : nil } %>
-            <%= link_to "My Job Applications", candidate_job_applications_path(@current_candidate), class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(candidate_job_applications_path(@current_candidate)) ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(candidate_job_applications_path(@current_candidate)) ? 'page' : nil } %>
+            <%= link_to "Jobs", jobs_path, class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(jobs_path) ? 'border-cyan-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(jobs_path) ? 'page' : nil } %>
+            <%= link_to "My Favorite Jobs", favorite_jobs_candidate_path(@current_candidate), class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(favorite_jobs_candidate_path(@current_candidate)) ? 'border-cyan-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(favorite_jobs_candidate_path(@current_candidate)) ? 'page' : nil } %>
+            <%= link_to "My Job Applications", candidate_job_applications_path(@current_candidate), class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(candidate_job_applications_path(@current_candidate)) ? 'border-cyan-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(candidate_job_applications_path(@current_candidate)) ? 'page' : nil } %>
           <% end %>
           <% if current_user.company? %>
-            <%= link_to "Published Jobs", published_jobs_company_path(@current_company), class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(published_jobs_company_path(@current_company)) ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(published_jobs_company_path(@current_company)) ? 'page' : nil } %>
+            <%= link_to "Published Jobs", published_jobs_company_path(@current_company), class: "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium #{current_page?(published_jobs_company_path(@current_company)) ? 'border-cyan-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}", aria: { current: current_page?(published_jobs_company_path(@current_company)) ? 'page' : nil } %>
           <% end %>
         </div>
       <% end %>

@@ -74,3 +74,4 @@ end
 gem "devise"
 gem "pundit"
 gem 'httparty'
+gem "ruby-openai"

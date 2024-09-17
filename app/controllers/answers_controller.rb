@@ -15,8 +15,7 @@ class AnswersController < ApplicationController
     @answer.job_application = @job_application
 
     if @answer.save
-      openai_service = OpenaiService.new(ENV['OPENAI_API_KEY'])
-      reaction = openai_service.generate_reaction(@answer.content)
+      reaction = @answer.generate_reaction(@answer.content)
       @answer.update(reaction: reaction)
 
       next_question = @interview.questions.find_by(number: @question.number + 1)
@@ -25,7 +24,7 @@ class AnswersController < ApplicationController
       else
         # No more questions, update the JobApplication status to finished
         @job_application.update(status: 'finished')
-        redirect_to root_path, notice: "Interview completed and job application submitted."
+        redirect_to candidate_job_applications_path(@current_candidate), notice: "Interview completed and job application submitted."
       end
     else
       render 'questions/show'
